@@ -4,25 +4,75 @@
 
 char *strcpy(char *destination, const char *source)
 {
-	/* TODO: Implement strcpy(). */
+	char *start = destination;
+
+	while (*source != '\0') {
+		*start = *source;
+		start++;
+		source++;
+	}
+
+	*start = '\0';
+
 	return destination;
 }
 
 char *strncpy(char *destination, const char *source, size_t len)
 {
-	/* TODO: Implement strncpy(). */
+	char *start = destination;
+
+	for (size_t i = 0; i < len; i++) {
+		*start = *source;
+		if (*source == '\0') {
+			break;
+		}
+
+		source++;
+		start++;
+	}
+
 	return destination;
 }
 
 char *strcat(char *destination, const char *source)
 {
-	/* TODO: Implement strcat(). */
+	char *start = destination;
+
+	while (*start != '\0') {
+		start++;
+	}
+
+	while (*source != '\0') {
+		*start = *source;
+		start++;
+		source++;
+	}
+
+	*start = '\0';
+
 	return destination;
 }
 
 char *strncat(char *destination, const char *source, size_t len)
 {
-	/* TODO: Implement strncat(). */
+	char *start = destination;
+
+	while (*start != '\0') {
+		start++;
+	}
+
+	for (size_t i = 0; i < len; i++) {
+		*start = *source;
+		if (*source == '\0') {
+			break;
+		}
+
+		source++;
+		start++;
+	}
+
+	*start = '\0';
+
 	return destination;
 }
 
