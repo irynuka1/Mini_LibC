@@ -2,13 +2,14 @@
 #include <internal/syscall.h>
 #include <errno.h>
 
-int nanosleep(const struct timespec *req, struct timespec *rem) {
-    long ret = syscall(35, req, rem);
+int nanosleep(const struct timespecs *req, struct timespec *rem)
+{
+    int ret = syscall(35, req, rem);
 
     if (ret < 0) {
         errno = -ret;
         return -1;
     }
 
-    return ret;
+    return 0;
 }
