@@ -9,7 +9,7 @@
 
 void *malloc(size_t size)
 {
-	/* TODO: Implent malloc(). */
+	/* TODO: Implement malloc(). */
 	return NULL;
 }
 
