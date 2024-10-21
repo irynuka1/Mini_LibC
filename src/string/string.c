@@ -78,14 +78,40 @@ char *strncat(char *destination, const char *source, size_t len)
 
 int strcmp(const char *str1, const char *str2)
 {
-	/* TODO: Implement strcmp(). */
-	return -1;
+	while (*str1 != '\0' && *str2 != '\0') {
+		if (*str1 != *str2) {
+			return *str1 - *str2;
+		}
+
+		str1++;
+		str2++;
+	}
+
+	if (*str1 == *str2) {
+		return 0;
+	} else if (*str1 == '\0') {
+		return -1;
+	} else {
+		return 1;
+	}
 }
 
 int strncmp(const char *str1, const char *str2, size_t len)
 {
-	/* TODO: Implement strncmp(). */
-	return -1;
+	for (size_t i = 0; i < len; i++) {
+		if (*str1 != *str2) {
+			return *str1 - *str2;
+		}
+
+		if (*str1 == '\0') {
+			return 0;
+		}
+
+		str1++;
+		str2++;
+	}
+
+	return 0;
 }
 
 size_t strlen(const char *str)
@@ -100,26 +126,80 @@ size_t strlen(const char *str)
 
 char *strchr(const char *str, int c)
 {
-	/* TODO: Implement strchr(). */
+	while (*str != '\0') {
+		if (*str == c) {
+			return (char *)str;
+		}
+
+		str++;
+	}
+
 	return NULL;
 }
 
 char *strrchr(const char *str, int c)
 {
-	/* TODO: Implement strrchr(). */
+	const char *start = str;
+
+	while (*str != '\0') {
+		str++;
+	}
+
+	while (str != start) {
+		if (*str == c) {
+			return (char *)str;
+		}
+
+		str--;
+	}
+
 	return NULL;
 }
 
 char *strstr(const char *haystack, const char *needle)
 {
-	/* TODO: Implement strstr(). */
+	while (*haystack != '\0') {
+		const char *hay_start = haystack;
+		const char *needle_start = needle;
+
+		while (*haystack != '\0' && *haystack == *needle) {
+			haystack++;
+			needle++;
+		}
+
+		if (*needle == '\0') {
+			return (char *)hay_start;
+		}
+
+		haystack = hay_start + 1;
+		needle = needle_start;
+	}
+
 	return NULL;
 }
 
 char *strrstr(const char *haystack, const char *needle)
 {
-	/* TODO: Implement strrstr(). */
-	return NULL;
+	char *res = NULL;
+
+	while (*haystack != '\0') {
+		const char *hay_start = haystack;
+		const char *needle_start = needle;
+
+		while (*haystack != '\0' && *haystack == *needle) {
+			haystack++;
+			needle++;
+		}
+
+		if (*needle == '\0') {
+			res = (char *)hay_start;
+		}
+
+		haystack = hay_start + 1;
+		needle = needle_start;
+	}
+
+	return res;
 }
 
 void *memcpy(void *destination, const void *source, size_t num)
