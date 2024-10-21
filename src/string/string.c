@@ -204,24 +204,44 @@ char *strrstr(const char *haystack, const char *needle)
 
 void *memcpy(void *destination, const void *source, size_t num)
 {
-	/* TODO: Implement memcpy(). */
+	for (size_t i = 0; i < num; i++) {
+		((char *)destination)[i] = ((char *)source)[i];
+	}
+
 	return destination;
 }
 
 void *memmove(void *destination, const void *source, size_t num)
 {
-	/* TODO: Implement memmove(). */
+	char *temp[num];
+
+	for (size_t i = 0; i < num; i++) {
+		temp[i] = ((char *)source)[i];
+	}
+
+	for (size_t i = 0; i < num; i++) {
+		((char *)destination)[i] = temp[i];
+	}
+
 	return destination;
 }
 
 int memcmp(const void *ptr1, const void *ptr2, size_t num)
 {
-	/* TODO: Implement memcmp(). */
-	return -1;
+	for (size_t i = 0; i < num; i++) {
+		if (((char *)ptr1)[i] != ((char *)ptr2)[i]) {
+			return ((char *)ptr1)[i] - ((char *)ptr2)[i];
+		}
+	}
+
+	return 0;
 }
 
 void *memset(void *source, int value, size_t num)
 {
-	/* TODO: Implement memset(). */
+	for (size_t i = 0; i < num; i++) {
+		((char *)source)[i] = value;
+	}
+
 	return source;
 }
