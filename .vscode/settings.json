@@ -5,6 +5,7 @@
         "syscall.h": "c",
         "time.h": "c",
         "types.h": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "mman.h": "c"
     }
 }

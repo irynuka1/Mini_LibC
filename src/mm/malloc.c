@@ -11,11 +11,14 @@ void *malloc(size_t size)
 {
 	void *ptr;
 
-	ptr = mmap(0, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
+	ptr = mmap(0, size + sizeof(int), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
 
 	if (!ptr) {
 		return NULL;
 	}
+
+	*((int *)ptr) = size;
+	ptr++;
 
 	return ptr;
 }
@@ -37,35 +40,27 @@ void *calloc(size_t nmemb, size_t size)
 
 void free(void *ptr)
 {
-	
+	ptr--;
+
+	munmap(ptr, *((int *)ptr) + sizeof(int));
 }
 
 void *realloc(void *ptr, size_t size)
 {
-	void *new_ptr;
+	mremap(ptr, 0, size + sizeof(int), MREMAP_MAYMOVE);
 
-	new_ptr = mmap(0, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
+	*((int *)ptr) = size;
+	ptr++;
 
-	if (!new_ptr) {
-		return NULL;
-	}
-
-	mremap(ptr, 0, size, new_ptr);
-
-	return new_ptr;
+	return ptr;
 }
 
 void *reallocarray(void *ptr, size_t nmemb, size_t size)
 {
-	void *new_ptr;
+	mremap(ptr, 0, nmemb * size + sizeof(int), MREMAP_MAYMOVE);
 
-	new_ptr = mmap(0, nmemb * size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
+	*((int *)ptr) = nmemb * size;
+	ptr++;
 
-	if (!new_ptr) {
-		return NULL;
-	}
-
-	mremap(ptr, 0, nmemb * size, new_ptr);
-
-	return new_ptr;
+	return ptr;
 }

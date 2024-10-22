@@ -213,7 +213,7 @@ void *memcpy(void *destination, const void *source, size_t num)
 
 void *memmove(void *destination, const void *source, size_t num)
 {
-	char *temp[num];
+	char temp[num];
 
 	for (size_t i = 0; i < num; i++) {
 		temp[i] = ((char *)source)[i];
