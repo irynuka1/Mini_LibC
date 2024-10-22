@@ -3,12 +3,21 @@
 #include <errno.h>
 
 int puts(const char *s) {
-    int ret = syscall(1, 1, s, strlen(s));
+    const char *str = s;
+    int len = 0;
+
+    while (*str != '\0') {
+        str++;
+        len++;
+    }
+
+    int ret = write(1, s, len);
 
     if (ret < 0) {
         errno = -ret;
         return -1;
     }
-    
+
+    write(1, "\n", 1);
     return ret;
 }
