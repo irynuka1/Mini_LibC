@@ -1,9 +1,9 @@
 #include <unistd.h>
 #include <internal/syscall.h>
 #include <errno.h>
-// #include <time.h>
+#include <time.h>
 
-int nanosleep(const struct timespecs *req, struct timespec *rem)
+int nanosleep(const struct timespec *req, struct timespec *rem)
 {
     int ret = syscall(35, req, rem);
 

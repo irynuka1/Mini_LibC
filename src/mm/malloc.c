@@ -37,7 +37,7 @@ void *calloc(size_t nmemb, size_t size)
 
 void free(void *ptr)
 {
-	munmap(ptr, 0);
+	
 }
 
 void *realloc(void *ptr, size_t size)
