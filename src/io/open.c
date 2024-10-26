@@ -9,6 +9,7 @@ int open(const char *filename, int flags, ...)
 {
 	va_list args;
 
+	// Geting the mode_t argument
 	va_start(args, flags);
 	mode_t mode = va_arg(args, mode_t);
 	va_end(args);
