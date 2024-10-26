@@ -17,6 +17,7 @@ void *malloc(size_t size)
 		return NULL;
 	}
 
+	// Storing the size of the allocated block in the first 4 bytes
 	*((int *)ptr) = size;
 	ptr++;
 
@@ -33,6 +34,7 @@ void *calloc(size_t nmemb, size_t size)
 		return NULL;
 	}
 
+	// Setting the allocated block to 0
 	memset(ptr, 0, nmemb * size);
 
 	return ptr;
@@ -40,6 +42,7 @@ void *calloc(size_t nmemb, size_t size)
 
 void free(void *ptr)
 {
+	// Decrementing the pointer to get the size of the memory block
 	ptr--;
 
 	munmap(ptr, *((int *)ptr) + sizeof(int));

@@ -1,8 +1,9 @@
 #ifndef TIME_H
-#define __TIME_H__  1
+#define __TIME_H__ 1
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include <internal/types.h>
@@ -10,8 +11,8 @@ extern "C" {
 typedef long time_t;
 
 struct timespec {
-    time_t tv_sec;
-    long tv_nsec;
+	time_t tv_sec;
+	long tv_nsec;
 };
 
 int nanosleep(const struct timespec *req, struct timespec *rem);
