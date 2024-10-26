@@ -221,7 +221,8 @@ void *memcpy(void *destination, const void *source, size_t num)
 
 void *memmove(void *destination, const void *source, size_t num)
 {
-	char temp[num];
+	int kTempSize = num;
+	char temp[kTempSize];
 
 	// Copying the source to a temporary buffer
 	for (size_t i = 0; i < num; i++) {
