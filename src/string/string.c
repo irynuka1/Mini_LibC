@@ -67,6 +67,7 @@ char *strncat(char *destination, const char *source, size_t len)
 		start++;
 	}
 
+	// Copying until the end of the source string or len characters
 	for (size_t i = 0; i < len; i++) {
 		*start = *source;
 		if (*source == '\0') {
@@ -84,7 +85,7 @@ char *strncat(char *destination, const char *source, size_t len)
 
 int strcmp(const char *str1, const char *str2)
 {
-	while (*str1 != '\0' && *str2 != '\0') {
+	while (*str1 != '\0' || *str2 != '\0') {
 		if (*str1 != *str2) {
 			return *str1 - *str2;
 		}
@@ -93,13 +94,8 @@ int strcmp(const char *str1, const char *str2)
 		str2++;
 	}
 
-	if (*str1 == *str2) {
-		return 0;
-	} else if (*str1 == '\0') {
-		return -1;
-	} else {
-		return 1;
-	}
+	// Returning 0 if the strings are equal
+	return 0;
 }
 
 int strncmp(const char *str1, const char *str2, size_t len)
@@ -109,6 +105,7 @@ int strncmp(const char *str1, const char *str2, size_t len)
 			return *str1 - *str2;
 		}
 
+		// If we reach the end of the strings return 0
 		if (*str1 == '\0') {
 			return 0;
 		}
@@ -147,6 +144,7 @@ char *strrchr(const char *str, int c)
 {
 	const char *start = str;
 
+	// Moving to the end of the string
 	while (*str != '\0') {
 		str++;
 	}
@@ -168,11 +166,13 @@ char *strstr(const char *haystack, const char *needle)
 		const char *hay_start = haystack;
 		const char *needle_start = needle;
 
+		// Checking if the needle is at the current position
 		while (*haystack != '\0' && *haystack == *needle) {
 			haystack++;
 			needle++;
 		}
 
+		// If the needle is found return the start position
 		if (*needle == '\0') {
 			return (char *)hay_start;
 		}
@@ -197,6 +197,7 @@ char *strrstr(const char *haystack, const char *needle)
 			needle++;
 		}
 
+		// If the needle is found, save the position
 		if (*needle == '\0') {
 			res = (char *)hay_start;
 		}
@@ -205,6 +206,7 @@ char *strrstr(const char *haystack, const char *needle)
 		needle = needle_start;
 	}
 
+	// Return the last position of the needle
 	return res;
 }
 
@@ -221,10 +223,12 @@ void *memmove(void *destination, const void *source, size_t num)
 {
 	char temp[num];
 
+	// Copying the source to a temporary buffer
 	for (size_t i = 0; i < num; i++) {
 		temp[i] = ((char *)source)[i];
 	}
 
+	// Copying the temporary buffer to the destination
 	for (size_t i = 0; i < num; i++) {
 		((char *)destination)[i] = temp[i];
 	}
