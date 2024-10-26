@@ -6,12 +6,14 @@ char *strcpy(char *destination, const char *source)
 {
 	char *start = destination;
 
+	// Moving the source string to the destination string char by char
 	while (*source != '\0') {
 		*start = *source;
 		start++;
 		source++;
 	}
 
+	// Adding the null terminator
 	*start = '\0';
 
 	return destination;
@@ -21,13 +23,16 @@ char *strncpy(char *destination, const char *source, size_t len)
 {
 	char *start = destination;
 
+	// If the source string is shorter than len, the rest of the destination
+	// string will be filled with null terminators
 	for (size_t i = 0; i < len; i++) {
-		*start = *source;
-		if (*source == '\0') {
-			break;
+		if (*source != '\0') {
+			*start = *source;
+			source++;
+		} else {
+			*start = '\0';
 		}
 
-		source++;
 		start++;
 	}
 
@@ -38,6 +43,7 @@ char *strcat(char *destination, const char *source)
 {
 	char *start = destination;
 
+	// Moving to the end of the destination string
 	while (*start != '\0') {
 		start++;
 	}
